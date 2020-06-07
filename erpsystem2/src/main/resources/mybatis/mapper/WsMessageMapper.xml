@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zx.erpsystem.system.dao.WsMessageMapper">
+
+    <resultMap type="com.zx.erpsystem.system.model.WsMessage" id="WsMessageMap">
+        <result property="messageId" column="messageId" jdbcType="INTEGER"/>
+        <result property="fromId" column="fromId" jdbcType="INTEGER"/>
+        <result property="fromName" column="fromName" jdbcType="VARCHAR"/>
+        <result property="toId" column="toId" jdbcType="INTEGER"/>
+        <result property="messageText" column="messageText" jdbcType="VARCHAR"/>
+        <result property="messageDate" column="messageDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="WsMessageMap">
+        select
+          messageId, fromId, fromName, toId, messageText, messageDate
+        from erpsystem.ws_message
+        where messageId = #{messageid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="WsMessageMap">
+        select
+          messageId, fromId, fromName, toId, messageText, messageDate
+        from erpsystem.ws_message
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="WsMessageMap">
+        select
+          messageId, fromId, fromName, toId, messageText, messageDate
+        from erpsystem.ws_message
+        <where>
+            <if test="messageid != null">
+                and messageId = #{messageid}
+            </if>
+            <if test="fromid != null">
+                and fromId = #{fromid}
+            </if>
+            <if test="fromname != null and fromname != ''">
+                and fromName = #{fromname}
+            </if>
+            <if test="toid != null">
+                and toId = #{toid}
+            </if>
+            <if test="messagetext != null and messagetext != ''">
+                and messageText = #{messagetext}
+            </if>
+            <if test="messagedate != null">
+                and messageDate = #{messagedate}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert"  parameterType="com.zx.erpsystem.system.model.WsMessage">
+        insert into ws_message(fromId, fromName, toId, messageText, messageDate)
+        values (#{fromid}, #{fromname}, #{toid}, #{messagetext}, #{messagedate})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.WsMessage" >
+        insert into ws_message
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="fromId != null">
+                fromId ,
+            </if>
+            <if test="fromName != null and fromName != ''">
+                fromName ,
+            </if>
+            <if test="toId != null">
+                toId ,
+            </if>
+            <if test="messageText != null and messageText != ''">
+                messageText ,
+            </if>
+            <if test="messageDate != null">
+                messageDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="fromId != null">
+                 #{fromId,jdbcType=INTEGER},
+            </if>
+            <if test="fromName != null and fromName != ''">
+                 #{fromName,jdbcType=VARCHAR},
+            </if>
+            <if test="toId != null">
+                 #{toId,jdbcType=INTEGER},
+            </if>
+            <if test="messageText != null and messageText != ''">
+               #{messageText,jdbcType=VARCHAR},
+            </if>
+            <if test="messageDate != null">
+               #{messageDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <!--通过主键修改数据-->
+    <update id="update">
+        update erpsystem.ws_message
+        <set>
+            <if test="fromid != null">
+                fromId = #{fromid},
+            </if>
+            <if test="fromname != null and fromname != ''">
+                fromName = #{fromname},
+            </if>
+            <if test="toid != null">
+                toId = #{toid},
+            </if>
+            <if test="messagetext != null and messagetext != ''">
+                messageText = #{messagetext},
+            </if>
+            <if test="messagedate != null">
+                messageDate = #{messagedate},
+            </if>
+        </set>
+        where messageId = #{messageid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from erpsystem.ws_message where messageId = #{messageid}
+    </delete>
+    <select id="queryAllWsMessage" resultMap="WsMessageMap">
+        select *from erpsystem.ws_message
+    </select>
+
+</mapper>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.CommodityManagementMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.CommodityManagement" >
+    <id column="commodity_management_no" property="commodityManagementNo" jdbcType="INTEGER" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+    <result column="commodity_origin_address" property="commodityOriginAddress" jdbcType="VARCHAR" />
+    <result column="commodity_unit" property="commodityUnit" jdbcType="CHAR" />
+    <result column="commodity_specification" property="commoditySpecification" jdbcType="VARCHAR" />
+    <result column="commodity_batch_number" property="commodityBatchNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    commodity_management_no, commodity_name, commodity_origin_address, commodity_unit,
+    commodity_specification, commodity_batch_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from commodity_management
+    where commodity_management_no = #{commodityManagementNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from commodity_management
+    where commodity_management_no = #{commodityManagementNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.erpsystem.system.model.CommodityManagement" >
+    insert into commodity_management (commodity_management_no, commodity_name, 
+      commodity_origin_address, commodity_unit, commodity_specification, 
+      commodity_batch_number)
+    values (#{commodityManagementNo,jdbcType=INTEGER}, #{commodityName,jdbcType=VARCHAR}, 
+      #{commodityOriginAddress,jdbcType=VARCHAR}, #{commodityUnit,jdbcType=CHAR}, #{commoditySpecification,jdbcType=VARCHAR}, 
+      #{commodityBatchNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.CommodityManagement" >
+    insert into commodity_management
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commodityManagementNo != null" >
+        commodity_management_no,
+      </if>
+      <if test="commodityName != null" >
+        commodity_name,
+      </if>
+      <if test="commodityOriginAddress != null" >
+        commodity_origin_address,
+      </if>
+      <if test="commodityUnit != null" >
+        commodity_unit,
+      </if>
+      <if test="commoditySpecification != null" >
+        commodity_specification,
+      </if>
+      <if test="commodityBatchNumber != null" >
+        commodity_batch_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commodityManagementNo != null" >
+        #{commodityManagementNo,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityOriginAddress != null" >
+        #{commodityOriginAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityUnit != null" >
+        #{commodityUnit,jdbcType=CHAR},
+      </if>
+      <if test="commoditySpecification != null" >
+        #{commoditySpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityBatchNumber != null" >
+        #{commodityBatchNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.CommodityManagement" >
+    update commodity_management
+    <set >
+      <if test="commodityName != null" >
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityOriginAddress != null" >
+        commodity_origin_address = #{commodityOriginAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityUnit != null" >
+        commodity_unit = #{commodityUnit,jdbcType=CHAR},
+      </if>
+      <if test="commoditySpecification != null" >
+        commodity_specification = #{commoditySpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityBatchNumber != null" >
+        commodity_batch_number = #{commodityBatchNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where commodity_management_no = #{commodityManagementNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.CommodityManagement" >
+    update commodity_management
+    set commodity_name = #{commodityName,jdbcType=VARCHAR},
+      commodity_origin_address = #{commodityOriginAddress,jdbcType=VARCHAR},
+      commodity_unit = #{commodityUnit,jdbcType=CHAR},
+      commodity_specification = #{commoditySpecification,jdbcType=VARCHAR},
+      commodity_batch_number = #{commodityBatchNumber,jdbcType=VARCHAR}
+    where commodity_management_no = #{commodityManagementNo,jdbcType=INTEGER}
+  </update>
+  <!--new-->
+  <select id="queryAllCommodity" resultMap="BaseResultMap" >
+    select
+      *
+    from commodity_management
+  </select>
+  <select id="queryCommodityByCommodityDimId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select *
+    from commodity_management
+    where cast(commodity_management_no as char) like #{s2}
+  </select>
+  <select id="queryCommodityByCommodityDimCoa" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+      *
+    from commodity_management
+    where commodity_origin_address like #{s3}
+
+  </select>
+</mapper>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.Permission" >
+    <id column="per_id" property="perId" jdbcType="INTEGER" />
+    <result column="p_id" property="pId" jdbcType="INTEGER" />
+    <result column="per_name" property="perName" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="per_url" property="perUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    per_id, p_id, per_name, type, per_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from permission
+    where per_id = #{perId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from permission
+    where per_id = #{perId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.erpsystem.system.model.Permission" >
+    insert into permission (per_id, p_id, per_name, 
+      type, per_url)
+    values (#{perId,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{perName,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{perUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.Permission" >
+    insert into permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="perId != null" >
+        per_id,
+      </if>
+      <if test="pId != null" >
+        p_id,
+      </if>
+      <if test="perName != null" >
+        per_name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="perUrl != null" >
+        per_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="perId != null" >
+        #{perId,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null" >
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="perName != null" >
+        #{perName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="perUrl != null" >
+        #{perUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.Permission" >
+    update permission
+    <set >
+      <if test="pId != null" >
+        p_id = #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="perName != null" >
+        per_name = #{perName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="perUrl != null" >
+        per_url = #{perUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where per_id = #{perId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.Permission" >
+    update permission
+    set p_id = #{pId,jdbcType=INTEGER},
+      per_name = #{perName,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      per_url = #{perUrl,jdbcType=VARCHAR}
+    where per_id = #{perId,jdbcType=INTEGER}
+  </update>
+  <!--new-->
+  <select id="queryMenuByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		 SELECT * FROM
+		permission
+		WHERE
+		type = 'menu'
+		AND per_id IN (
+		SELECT
+		per_id
+		FROM
+		role_permission
+		WHERE
+		role_id IN (
+		SELECT
+		role_id
+		FROM
+		user_role
+		WHERE
+		user_id =#{userId,jdbcType=INTEGER}
+		 )
+		)
+	</select>
+  <select id="querypermissionByPId_Son" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		*
+		from permission
+		where p_id = #{permissionId,jdbcType=INTEGER}
+	</select>
+
+</mapper>

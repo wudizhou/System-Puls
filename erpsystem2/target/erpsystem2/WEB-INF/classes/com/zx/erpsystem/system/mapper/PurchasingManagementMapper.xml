@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.PurchasingManagementMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.PurchasingManagement" >
+    <id column="purchase_orders_no" property="purchaseOrdersNo" jdbcType="INTEGER" />
+    <result column="commodity_name" property="commodityName" jdbcType="CHAR" />
+    <result column="purchase_quantity" property="purchaseQuantity" jdbcType="CHAR" />
+    <result column="purchase_date" property="purchaseDate" jdbcType="CHAR" />
+    <result column="purchase_status" property="purchaseStatus" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    purchase_orders_no, commodity_name, purchase_quantity, purchase_date, purchase_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from purchasing_management
+    where purchase_orders_no = #{purchaseOrdersNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from purchasing_management
+    where purchase_orders_no = #{purchaseOrdersNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.erpsystem.system.model.PurchasingManagement" >
+    insert into purchasing_management (purchase_orders_no, commodity_name, purchase_quantity, 
+      purchase_date, purchase_status)
+    values (#{purchaseOrdersNo,jdbcType=INTEGER}, #{commodityName,jdbcType=CHAR}, #{purchaseQuantity,jdbcType=CHAR}, 
+      #{purchaseDate,jdbcType=CHAR}, #{purchaseStatus,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.PurchasingManagement" >
+    insert into purchasing_management
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purchaseOrdersNo != null" >
+        purchase_orders_no,
+      </if>
+      <if test="commodityName != null" >
+        commodity_name,
+      </if>
+      <if test="purchaseQuantity != null" >
+        purchase_quantity,
+      </if>
+      <if test="purchaseDate != null" >
+        purchase_date,
+      </if>
+      <if test="purchaseStatus != null" >
+        purchase_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purchaseOrdersNo != null" >
+        #{purchaseOrdersNo,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        #{commodityName,jdbcType=CHAR},
+      </if>
+      <if test="purchaseQuantity != null" >
+        #{purchaseQuantity,jdbcType=CHAR},
+      </if>
+      <if test="purchaseDate != null" >
+        #{purchaseDate,jdbcType=CHAR},
+      </if>
+      <if test="purchaseStatus != null" >
+        #{purchaseStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.PurchasingManagement" >
+    update purchasing_management
+    <set >
+      <if test="commodityName != null" >
+        commodity_name = #{commodityName,jdbcType=CHAR},
+      </if>
+      <if test="purchaseQuantity != null" >
+        purchase_quantity = #{purchaseQuantity,jdbcType=CHAR},
+      </if>
+      <if test="purchaseDate != null" >
+        purchase_date = #{purchaseDate,jdbcType=CHAR},
+      </if>
+      <if test="purchaseStatus != null" >
+        purchase_status = #{purchaseStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where purchase_orders_no = #{purchaseOrdersNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.PurchasingManagement" >
+    update purchasing_management
+    set commodity_name = #{commodityName,jdbcType=CHAR},
+      purchase_quantity = #{purchaseQuantity,jdbcType=CHAR},
+      purchase_date = #{purchaseDate,jdbcType=CHAR},
+      purchase_status = #{purchaseStatus,jdbcType=CHAR}
+    where purchase_orders_no = #{purchaseOrdersNo,jdbcType=INTEGER}
+  </update>
+</mapper>

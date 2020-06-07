@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.PendingSalesOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.PendingSalesOrder" >
+    <id column="stay_sales_order_no" property="staySalesOrderNo" jdbcType="INTEGER" />
+    <result column="product_name" property="productName" jdbcType="CHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="sales_quantity" property="salesQuantity" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    stay_sales_order_no, product_name, customer_name, sales_quantity
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pending_sales_order
+    where stay_sales_order_no = #{staySalesOrderNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pending_sales_order
+    where stay_sales_order_no = #{staySalesOrderNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.erpsystem.system.model.PendingSalesOrder" >
+    insert into pending_sales_order (stay_sales_order_no, product_name, customer_name, 
+      sales_quantity)
+    values (#{staySalesOrderNo,jdbcType=INTEGER}, #{productName,jdbcType=CHAR}, #{customerName,jdbcType=VARCHAR}, 
+      #{salesQuantity,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.PendingSalesOrder" >
+    insert into pending_sales_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="staySalesOrderNo != null" >
+        stay_sales_order_no,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="salesQuantity != null" >
+        sales_quantity,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="staySalesOrderNo != null" >
+        #{staySalesOrderNo,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=CHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="salesQuantity != null" >
+        #{salesQuantity,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.PendingSalesOrder" >
+    update pending_sales_order
+    <set >
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=CHAR},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="salesQuantity != null" >
+        sales_quantity = #{salesQuantity,jdbcType=INTEGER},
+      </if>
+    </set>
+    where stay_sales_order_no = #{staySalesOrderNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.PendingSalesOrder" >
+    update pending_sales_order
+    set product_name = #{productName,jdbcType=CHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      sales_quantity = #{salesQuantity,jdbcType=INTEGER}
+    where stay_sales_order_no = #{staySalesOrderNo,jdbcType=INTEGER}
+  </update>
+  <!--new-->
+  <select id="queryAllSalrsOrder" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+       *
+    from pending_sales_order
+  </select>
+</mapper>

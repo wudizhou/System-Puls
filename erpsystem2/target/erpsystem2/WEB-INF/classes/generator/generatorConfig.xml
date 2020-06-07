@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration [
+		<!ELEMENT generatorConfiguration (classPathEntry|context)*>
+		<!ELEMENT classPathEntry (#PCDATA)>
+		<!ATTLIST classPathEntry
+				location CDATA #REQUIRED>
+		<!ELEMENT context (commentGenerator|jdbcConnection|javaModelGenerator|sqlMapGenerator|javaClientGenerator|table)*>
+		<!ATTLIST context
+				id CDATA #REQUIRED>
+		<!ELEMENT commentGenerator (property)*>
+		<!ELEMENT property (#PCDATA)>
+		<!ATTLIST property
+				name CDATA #REQUIRED
+				value CDATA #REQUIRED>
+		<!ELEMENT jdbcConnection (#PCDATA)>
+		<!ATTLIST jdbcConnection
+				driverClass CDATA #REQUIRED
+				connectionURL CDATA #REQUIRED
+				userId CDATA #REQUIRED
+				password CDATA #REQUIRED>
+		<!ELEMENT javaModelGenerator (#PCDATA)>
+		<!ATTLIST javaModelGenerator
+				targetPackage CDATA #REQUIRED
+				targetProject CDATA #REQUIRED>
+		<!ELEMENT sqlMapGenerator (#PCDATA)>
+		<!ATTLIST sqlMapGenerator
+				targetPackage CDATA #REQUIRED
+				targetProject CDATA #REQUIRED>
+		<!ELEMENT javaClientGenerator (#PCDATA)>
+		<!ATTLIST javaClientGenerator
+				targetPackage CDATA #REQUIRED
+				targetProject CDATA #REQUIRED
+				type CDATA #REQUIRED>
+		<!ELEMENT table (#PCDATA)>
+		<!ATTLIST table
+				domainObjectName CDATA #REQUIRED
+				enableCountByExample CDATA #REQUIRED
+				enableDeleteByExample CDATA #REQUIRED
+				enableSelectByExample CDATA #REQUIRED
+				enableUpdateByExample CDATA #REQUIRED
+				selectByExampleQueryId CDATA #REQUIRED
+				tableName CDATA #REQUIRED>
+		]>
+<generatorConfiguration>
+	<!-- 配置驱动 -->
+	<classPathEntry location="C:\Program Files\Java\mysql-connector-java-5.1.21.jar" />
+	<context id="context1">
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/erpsystem" userId="root"
+			password="1234" />
+		<!-- 1、领域模型 -->
+		<javaModelGenerator targetPackage="com.zx.erpystem.system.model"
+			targetProject="src//main/java" />
+		<!-- 2、xml文件 -->
+		<sqlMapGenerator targetPackage="com.zx.erpystem.system.mapper"
+			targetProject="src/main/java" />
+		<!-- 3、接口 -->
+		<javaClientGenerator targetPackage="com.zx.erpystem.system.dao"
+			targetProject="src/main/java" type="XMLMAPPER" />
+
+
+		<table tableName="user" domainObjectName="User"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="user_role" domainObjectName="UserRole"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="role" domainObjectName="Role"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="role_permission" domainObjectName="RolePermission"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="permission" domainObjectName="Permission"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="product_registration" domainObjectName="ProductRegistration"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="plane_management" domainObjectName="PlaneManagement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="product_picking_management" domainObjectName="ProductPickingManagement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName=" order_browse" domainObjectName="OrderBrowse"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="purchasing_management" domainObjectName="PurchasingManagement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="commodity_inventory_management" domainObjectName="CommodityInventoryManagement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="product_inventory_management" domainObjectName="ProductInventoryManagement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="ales_outbound_management" domainObjectName="SalesOutboundManagement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="purchase_warehousing_management" domainObjectName="PurchaseWarehousingManagement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="product_warehousing_management" domainObjectName="ProductWarehousingManagement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="picking_outbound_management" domainObjectName="PickingOutboundManagement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="sales_order_browse" domainObjectName="SalesOrderBrowse"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="pending_sales_order" domainObjectName="PendingSalesOrder"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="commodity_management" domainObjectName="CommodityManagement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="product_management" domainObjectName="ProductManagement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="customer_management" domainObjectName="CustomerManagement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="sales_statement" domainObjectName="SalesStatement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="purchase_statement" domainObjectName="PurchaseStatement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="supplier_management" domainObjectName="SupplierManagement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+		<table tableName="sales_outbound_management" domainObjectName="SalesOutboundManagement"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
+
+	</context>
+</generatorConfiguration>

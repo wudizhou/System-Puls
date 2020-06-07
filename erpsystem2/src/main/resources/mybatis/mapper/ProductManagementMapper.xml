@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.ProductManagementMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.ProductManagement" >
+    <id column="product_management_no" property="productManagementNo" jdbcType="INTEGER" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_origin_address" property="productOriginAddress" jdbcType="VARCHAR" />
+    <result column="product_unit" property="productUnit" jdbcType="CHAR" />
+    <result column="product_specification" property="productSpecification" jdbcType="VARCHAR" />
+    <result column="product_batch_number" property="productBatchNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    product_management_no, product_name, product_origin_address, product_unit, product_specification, 
+    product_batch_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_management
+    where product_management_no = #{productManagementNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_management
+    where product_management_no = #{productManagementNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.erpsystem.system.model.ProductManagement" >
+    insert into product_management (product_management_no, product_name, 
+      product_origin_address, product_unit, product_specification, 
+      product_batch_number)
+    values (#{productManagementNo,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, 
+      #{productOriginAddress,jdbcType=VARCHAR}, #{productUnit,jdbcType=CHAR}, #{productSpecification,jdbcType=VARCHAR}, 
+      #{productBatchNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.ProductManagement" >
+    insert into product_management
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productManagementNo != null" >
+        product_management_no,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productOriginAddress != null" >
+        product_origin_address,
+      </if>
+      <if test="productUnit != null" >
+        product_unit,
+      </if>
+      <if test="productSpecification != null" >
+        product_specification,
+      </if>
+      <if test="productBatchNumber != null" >
+        product_batch_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productManagementNo != null" >
+        #{productManagementNo,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productOriginAddress != null" >
+        #{productOriginAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="productUnit != null" >
+        #{productUnit,jdbcType=CHAR},
+      </if>
+      <if test="productSpecification != null" >
+        #{productSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="productBatchNumber != null" >
+        #{productBatchNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.ProductManagement" >
+    update product_management
+    <set >
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productOriginAddress != null" >
+        product_origin_address = #{productOriginAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="productUnit != null" >
+        product_unit = #{productUnit,jdbcType=CHAR},
+      </if>
+      <if test="productSpecification != null" >
+        product_specification = #{productSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="productBatchNumber != null" >
+        product_batch_number = #{productBatchNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where product_management_no = #{productManagementNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.ProductManagement" >
+    update product_management
+    set product_name = #{productName,jdbcType=VARCHAR},
+      product_origin_address = #{productOriginAddress,jdbcType=VARCHAR},
+      product_unit = #{productUnit,jdbcType=CHAR},
+      product_specification = #{productSpecification,jdbcType=VARCHAR},
+      product_batch_number = #{productBatchNumber,jdbcType=VARCHAR}
+    where product_management_no = #{productManagementNo,jdbcType=INTEGER}
+  </update>
+  <!--new-->
+  <select id="queryAllProduct" resultMap="BaseResultMap"  >
+    select
+     *
+    from product_management
+  </select>
+  <select id="queryProductByCondition" resultMap="BaseResultMap" parameterType="Map"  >
+    select * from  product_management
+    <where>
+      <if test="productManagementNo != null and productManagementNo != ''">
+        and product_management_no like concat('%',${productManagementNo},'%')
+      </if>
+      <if test="productName != null and productName != ''">
+        and product_name like'%${productName}%'
+      </if>
+      <if test="productOriginAddress != null and productOriginAddress != ''">
+        and product_origin_address like'%${productOriginAddress}%'
+      </if>
+      <if test="productUnit != null and productUnit != ''">
+        and product_unit like'%${productUnit}%'
+      </if>
+      <if test="productSpecification != null and productSpecification != ''">
+        and product_specification like'%${productSpecification}%'
+      </if>
+      <if test="productBatchNumber != null and productBatchNumber != ''">
+        and productBatchNumber like'%${productBatchNumber}%'
+      </if></where>
+   </select>
+  <select id="queryProductByKeyWord" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select * from  product_management
+    <where>
+      <if test="value != null and value != ''">
+        and concat(product_management_no,product_name,product_origin_address,product_unit,product_specification,product_batch_number) like  '%${value}%'
+      </if>
+    </where>
+  </select>
+</mapper>

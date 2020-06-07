@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.ProductRegistrationMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.ProductRegistration" >
+    <id column="production_no" property="productionNo" jdbcType="INTEGER" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="production_quantity" property="productionQuantity" jdbcType="INTEGER" />
+    <result column="produced_date" property="producedDate" jdbcType="TIMESTAMP" />
+    <result column="production_status" property="productionStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    production_no, product_name, production_quantity, produced_date, production_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_registration
+    where production_no = #{productionNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_registration
+    where production_no = #{productionNo,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from product_registration
+    where production_no = #{productionNo,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.zx.erpsystem.system.model.ProductRegistration" >
+    insert into product_registration (production_no, product_name, production_quantity, 
+      produced_date, production_status)
+    values (#{productionNo,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{productionQuantity,jdbcType=INTEGER}, 
+      #{producedDate,jdbcType=TIMESTAMP}, #{productionStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.ProductRegistration" >
+    insert into product_registration
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productionNo != null" >
+        production_no,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productionQuantity != null" >
+        production_quantity,
+      </if>
+      <if test="producedDate != null" >
+        produced_date,
+      </if>
+      <if test="productionStatus != null" >
+        production_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productionNo != null" >
+        #{productionNo,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productionQuantity != null" >
+        #{productionQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="producedDate != null" >
+        #{producedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productionStatus != null" >
+        #{productionStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.ProductRegistration" >
+    update product_registration
+    <set >
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productionQuantity != null" >
+        production_quantity = #{productionQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="producedDate != null" >
+        produced_date = #{producedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productionStatus != null" >
+        production_status = #{productionStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where production_no = #{productionNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.ProductRegistration" >
+    update product_registration
+    set product_name = #{productName,jdbcType=VARCHAR},
+      production_quantity = #{productionQuantity,jdbcType=INTEGER},
+      produced_date = #{producedDate,jdbcType=TIMESTAMP},
+      production_status = #{productionStatus,jdbcType=VARCHAR}
+    where production_no = #{productionNo,jdbcType=INTEGER}
+  </update>
+  <!--查询所有登记产品信息-->
+  <select id="queryList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from product_registration
+  </select>
+
+  <!--条件查询登记产品信息-->
+  <select id="queryProductionListCondition" resultMap="BaseResultMap" parameterType="com.zx.erpsystem.system.model.ProductRegistration" >
+    select
+    <include refid="Base_Column_List" />
+    from product_registration
+    where 1=1
+    <if test="productionNo != '' and productionNo != null">
+      and production_no =#{productionNo}
+    </if>
+    <if test="productName != '' and productName != null">
+      and product_name =#{productName}
+    </if>
+    <if test="productionStatus != '' and productionStatus != null">
+      and production_status =#{productionStatus}
+    </if>
+  </select>
+</mapper>

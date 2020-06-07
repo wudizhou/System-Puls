@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.ProductWarehousingManagementMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.ProductWarehousingManagement" >
+    <id column="product_storage_orders_no" property="productStorageOrdersNo" jdbcType="INTEGER" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_category" property="productCategory" jdbcType="VARCHAR" />
+    <result column="product_storage_quantity" property="productStorageQuantity" jdbcType="INTEGER" />
+    <result column="storage_staff" property="storageStaff" jdbcType="VARCHAR" />
+    <result column="product_storage_status" property="productStorageStatus" jdbcType="CHAR" />
+    <result column="product_storage_date" property="productStorageDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    product_storage_orders_no, product_name, product_category, product_storage_quantity, 
+    storage_staff, product_storage_status, product_storage_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_warehousing_management
+    where product_storage_orders_no = #{productStorageOrdersNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_warehousing_management
+    where product_storage_orders_no = #{productStorageOrdersNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.erpsystem.system.model.ProductWarehousingManagement" >
+    insert into product_warehousing_management (product_storage_orders_no, product_name, 
+      product_category, product_storage_quantity, 
+      storage_staff, product_storage_status, product_storage_date
+      )
+    values (#{productStorageOrdersNo,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, 
+      #{productCategory,jdbcType=VARCHAR}, #{productStorageQuantity,jdbcType=INTEGER}, 
+      #{storageStaff,jdbcType=VARCHAR}, #{productStorageStatus,jdbcType=CHAR}, #{productStorageDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.ProductWarehousingManagement" >
+    insert into product_warehousing_management
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productStorageOrdersNo != null" >
+        product_storage_orders_no,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productCategory != null" >
+        product_category,
+      </if>
+      <if test="productStorageQuantity != null" >
+        product_storage_quantity,
+      </if>
+      <if test="storageStaff != null" >
+        storage_staff,
+      </if>
+      <if test="productStorageStatus != null" >
+        product_storage_status,
+      </if>
+      <if test="productStorageDate != null" >
+        product_storage_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productStorageOrdersNo != null" >
+        #{productStorageOrdersNo,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productCategory != null" >
+        #{productCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="productStorageQuantity != null" >
+        #{productStorageQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="storageStaff != null" >
+        #{storageStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="productStorageStatus != null" >
+        #{productStorageStatus,jdbcType=CHAR},
+      </if>
+      <if test="productStorageDate != null" >
+        #{productStorageDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.ProductWarehousingManagement" >
+    update product_warehousing_management
+    <set >
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productCategory != null" >
+        product_category = #{productCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="productStorageQuantity != null" >
+        product_storage_quantity = #{productStorageQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="storageStaff != null" >
+        storage_staff = #{storageStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="productStorageStatus != null" >
+        product_storage_status = #{productStorageStatus,jdbcType=CHAR},
+      </if>
+      <if test="productStorageDate != null" >
+        product_storage_date = #{productStorageDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where product_storage_orders_no = #{productStorageOrdersNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.ProductWarehousingManagement" >
+    update product_warehousing_management
+    set product_name = #{productName,jdbcType=VARCHAR},
+      product_category = #{productCategory,jdbcType=VARCHAR},
+      product_storage_quantity = #{productStorageQuantity,jdbcType=INTEGER},
+      storage_staff = #{storageStaff,jdbcType=VARCHAR},
+      product_storage_status = #{productStorageStatus,jdbcType=CHAR},
+      product_storage_date = #{productStorageDate,jdbcType=TIMESTAMP}
+    where product_storage_orders_no = #{productStorageOrdersNo,jdbcType=INTEGER}
+  </update>
+  <select id="queryAllProductWarehousing" resultMap="BaseResultMap"  >
+    select * from product_warehousing_management
+  </select>
+</mapper>

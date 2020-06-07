@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.PurchaseStatementMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.PurchaseStatement" >
+    <id column="purchase_counter_no" property="purchaseCounterNo" jdbcType="INTEGER" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+    <result column="purchase_quantity" property="purchaseQuantity" jdbcType="INTEGER" />
+    <result column="purchase_money" property="purchaseMoney" jdbcType="DOUBLE" />
+    <result column="purchase_no" property="purchaseNo" jdbcType="VARCHAR" />
+    <result column="purchase_counter_date" property="purchaseCounterDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    purchase_counter_no, commodity_name, purchase_quantity, purchase_money, purchase_no, 
+    purchase_counter_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from purchase_statement
+    where purchase_counter_no = #{purchaseCounterNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from purchase_statement
+    where purchase_counter_no = #{purchaseCounterNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.erpsystem.system.model.PurchaseStatement" >
+    insert into purchase_statement (purchase_counter_no, commodity_name, 
+      purchase_quantity, purchase_money, purchase_no, 
+      purchase_counter_date)
+    values (#{purchaseCounterNo,jdbcType=INTEGER}, #{commodityName,jdbcType=VARCHAR}, 
+      #{purchaseQuantity,jdbcType=INTEGER}, #{purchaseMoney,jdbcType=DOUBLE}, #{purchaseNo,jdbcType=VARCHAR}, 
+      #{purchaseCounterDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.PurchaseStatement" >
+    insert into purchase_statement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purchaseCounterNo != null" >
+        purchase_counter_no,
+      </if>
+      <if test="commodityName != null" >
+        commodity_name,
+      </if>
+      <if test="purchaseQuantity != null" >
+        purchase_quantity,
+      </if>
+      <if test="purchaseMoney != null" >
+        purchase_money,
+      </if>
+      <if test="purchaseNo != null" >
+        purchase_no,
+      </if>
+      <if test="purchaseCounterDate != null" >
+        purchase_counter_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purchaseCounterNo != null" >
+        #{purchaseCounterNo,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseQuantity != null" >
+        #{purchaseQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseMoney != null" >
+        #{purchaseMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="purchaseNo != null" >
+        #{purchaseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseCounterDate != null" >
+        #{purchaseCounterDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.PurchaseStatement" >
+    update purchase_statement
+    <set >
+      <if test="commodityName != null" >
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseQuantity != null" >
+        purchase_quantity = #{purchaseQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseMoney != null" >
+        purchase_money = #{purchaseMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="purchaseNo != null" >
+        purchase_no = #{purchaseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseCounterDate != null" >
+        purchase_counter_date = #{purchaseCounterDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where purchase_counter_no = #{purchaseCounterNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.PurchaseStatement" >
+    update purchase_statement
+    set commodity_name = #{commodityName,jdbcType=VARCHAR},
+      purchase_quantity = #{purchaseQuantity,jdbcType=INTEGER},
+      purchase_money = #{purchaseMoney,jdbcType=DOUBLE},
+      purchase_no = #{purchaseNo,jdbcType=VARCHAR},
+      purchase_counter_date = #{purchaseCounterDate,jdbcType=TIMESTAMP}
+    where purchase_counter_no = #{purchaseCounterNo,jdbcType=INTEGER}
+  </update>
+</mapper>

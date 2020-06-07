@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.SupplierManagementMapper" >
+    <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.SupplierManagement" >
+        <id column="supplier_management_no" property="supplierManagementNo" jdbcType="INTEGER" />
+        <result column="supplier_abbreviation" property="supplierAbbreviation" jdbcType="CHAR" />
+        <result column="supplier_tel" property="supplierTel" jdbcType="VARCHAR" />
+        <result column="supplier_linkman" property="supplierLinkman" jdbcType="CHAR" />
+        <result column="supplier_email" property="supplierEmail" jdbcType="VARCHAR" />
+        <result column="supplier_deposit_bank" property="supplierDepositBank" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    supplier_management_no, supplier_abbreviation, supplier_tel, supplier_linkman, supplier_email,
+    supplier_deposit_bank
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from supplier_management
+        where supplier_management_no = #{supplierManagementNo,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from supplier_management
+    where supplier_management_no = #{supplierManagementNo,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.zx.erpsystem.system.model.SupplierManagement" >
+    insert into supplier_management (supplier_management_no, supplier_abbreviation,
+     supplier_tel, supplier_linkman, supplier_email,
+      supplier_deposit_bank)
+    values (#{supplierManagementNo,jdbcType=INTEGER}, #{supplierAbbreviation,jdbcType=CHAR},
+      #{supplierTel,jdbcType=VARCHAR}, #{supplierLinkman,jdbcType=CHAR}, #{supplierEmail,jdbcType=VARCHAR},
+      #{supplierDepositBank,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.SupplierManagement" >
+        insert into supplier_management
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="supplierManagementNo != null" >
+                supplier_management_no,
+            </if>
+            <if test="supplierAbbreviation != null" >
+                supplier_abbreviation,
+            </if>
+            <if test="supplierTel != null" >
+                supplier_tel,
+            </if>
+            <if test="supplierLinkman != null" >
+                supplier_linkman,
+            </if>
+            <if test="supplierEmail != null" >
+                supplier_email,
+            </if>
+            <if test="supplierDepositBank != null" >
+                supplier_deposit_bank,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="supplierManagementNo != null" >
+                #{supplierManagementNo,jdbcType=INTEGER},
+            </if>
+            <if test="supplierAbbreviation != null" >
+                #{supplierAbbreviation,jdbcType=CHAR},
+            </if>
+            <if test="supplierTel != null" >
+                #{supplierTel,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierLinkman != null" >
+                #{supplierLinkman,jdbcType=CHAR},
+            </if>
+            <if test="supplierEmail != null" >
+                #{supplierEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierDepositBank != null" >
+                #{supplierDepositBank,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.SupplierManagement" >
+        update supplier_management
+        <set >
+            <if test="supplierAbbreviation != null" >
+                supplier_abbreviation = #{supplierAbbreviation,jdbcType=CHAR},
+            </if>
+            <if test="supplierTel != null" >
+                supplier_tel = #{supplierTel,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierLinkman != null" >
+                supplier_linkman = #{supplierLinkman,jdbcType=CHAR},
+            </if>
+            <if test="supplierEmail != null" >
+                supplier_email = #{supplierEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierDepositBank != null" >
+                supplier_deposit_bank = #{supplierDepositBank,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where supplier_management_no = #{supplierManagementNo,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.SupplierManagement" >
+    update supplier_management
+    set supplier_abbreviation = #{supplierAbbreviation,jdbcType=CHAR},
+     supplier_tel = #{supplierTel,jdbcType=VARCHAR},
+     supplier_linkman = #{supplierLinkman,jdbcType=CHAR},
+      supplier_email = #{supplierEmail,jdbcType=VARCHAR},
+     supplier_deposit_bank = #{supplierDepositBank,jdbcType=VARCHAR}
+    where supplier_management_no = #{supplierManagementNo,jdbcType=INTEGER}
+  </update>
+    <!--new-->
+    <select id="queryAllSupplier" resultMap="BaseResultMap" >
+    select
+     *
+    from supplier_management
+  </select>
+
+</mapper>

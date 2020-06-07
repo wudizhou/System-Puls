@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.ProductInventoryManagementMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.ProductInventoryManagement" >
+    <id column="product_inventory_no" property="productInventoryNo" jdbcType="INTEGER" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_price" property="productPrice" jdbcType="DOUBLE" />
+    <result column="product_inventory_quantity" property="productInventoryQuantity" jdbcType="INTEGER" />
+    <result column="product_category" property="productCategory" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    product_inventory_no, product_name, product_price, product_inventory_quantity, product_category
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_inventory_management
+    where product_inventory_no = #{productInventoryNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_inventory_management
+    where product_inventory_no = #{productInventoryNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.erpsystem.system.model.ProductInventoryManagement" >
+    insert into product_inventory_management (product_inventory_no, product_name, 
+      product_price, product_inventory_quantity, 
+      product_category)
+    values (#{productInventoryNo,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, 
+      #{productPrice,jdbcType=DOUBLE}, #{productInventoryQuantity,jdbcType=INTEGER}, 
+      #{productCategory,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.ProductInventoryManagement" >
+    insert into product_inventory_management
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productInventoryNo != null" >
+        product_inventory_no,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productPrice != null" >
+        product_price,
+      </if>
+      <if test="productInventoryQuantity != null" >
+        product_inventory_quantity,
+      </if>
+      <if test="productCategory != null" >
+        product_category,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productInventoryNo != null" >
+        #{productInventoryNo,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null" >
+        #{productPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="productInventoryQuantity != null" >
+        #{productInventoryQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="productCategory != null" >
+        #{productCategory,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.ProductInventoryManagement" >
+    update product_inventory_management
+    <set >
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null" >
+        product_price = #{productPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="productInventoryQuantity != null" >
+        product_inventory_quantity = #{productInventoryQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="productCategory != null" >
+        product_category = #{productCategory,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where product_inventory_no = #{productInventoryNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.ProductInventoryManagement" >
+    update product_inventory_management
+    set product_name = #{productName,jdbcType=VARCHAR},
+      product_price = #{productPrice,jdbcType=DOUBLE},
+      product_inventory_quantity = #{productInventoryQuantity,jdbcType=INTEGER},
+      product_category = #{productCategory,jdbcType=VARCHAR}
+    where product_inventory_no = #{productInventoryNo,jdbcType=INTEGER}
+  </update>
+  <!--new-->
+  <select id="queryAllproductInventory" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+   *
+    from product_inventory_management
+  </select>
+</mapper>

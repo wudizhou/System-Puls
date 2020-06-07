@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.SalesOutboundManagementMapper" >
+    <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.SalesOutboundManagement" >
+        <id column="sale_outbound_delivery_order_no" property="saleOutboundDeliveryOrderNo" jdbcType="INTEGER" />
+        <result column="product_name" property="productName" jdbcType="VARCHAR" />
+        <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+        <result column="sales_staff" property="salesStaff" jdbcType="VARCHAR" />
+        <result column="product_outbound_delivery_date" property="productOutboundDeliveryDate" jdbcType="TIMESTAMP" />
+        <result column="product_outbound_delivery_quantity" property="productOutboundDeliveryQuantity" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        sale_outbound_delivery_order_no, product_name, customer_name, sales_staff,
+        product_outbound_delivery_date, product_outbound_delivery_quantity
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from sales_outbound_management
+        where sale_outbound_delivery_order_no = #{saleOutboundDeliveryOrderNo,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from sales_outbound_management
+        where sale_outbound_delivery_order_no = #{saleOutboundDeliveryOrderNo,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.zx.erpsystem.system.model.SalesOutboundManagement" >
+        insert into sales_outbound_management (sale_outbound_delivery_order_no, product_name, customer_name, sales_staff,
+        product_outbound_delivery_date, product_outbound_delivery_quantity
+        )
+        values (#{saleOutboundDeliveryOrderNo,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR},
+        #{customerName,jdbcType=VARCHAR}, #{salesStaff,jdbcType=VARCHAR},
+        #{productOutboundDeliveryDate,jdbcType=TIMESTAMP}, #{productOutboundDeliveryQuantity,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.SalesOutboundManagement" >
+        insert into sales_outbound_management
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="saleOutboundDeliveryOrderNo != null" >
+                sale_outbound_delivery_order_no,
+            </if>
+            <if test="productName != null" >
+                product_name,
+            </if>
+            <if test="customerName != null" >
+                customer_name,
+            </if>
+            <if test="salesStaff != null" >
+                sales_staff,
+            </if>
+            <if test="productOutboundDeliveryDate != null" >
+                product_outbound_delivery_date,
+            </if>
+            <if test="productOutboundDeliveryQuantity != null" >
+                product_outbound_delivery_quantity,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="saleOutboundDeliveryOrderNo != null" >
+                #{saleOutboundDeliveryOrderNo},
+            </if>
+            <if test="productName != null" >
+                #{productName},
+            </if>
+            <if test="customerName != null" >
+                #{customerName},
+            </if>
+            <if test="salesStaff != null" >
+                #{salesStaff},
+            </if>
+            <if test="productOutboundDeliveryDate != null" >
+                #{productOutboundDeliveryDate},
+            </if>
+            <if test="productOutboundDeliveryQuantity != null" >
+                #{productOutboundDeliveryQuantity},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.SalesOutboundManagement" >
+        update sales_outbound_management
+        <set >
+            <if test="productName != null" >
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="customerName != null" >
+                customer_name = #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="salesStaff != null" >
+                sales_staff = #{salesStaff,jdbcType=VARCHAR},
+            </if>
+            <if test="productOutboundDeliveryDate != null" >
+                product_outbound_delivery_date = #{productOutboundDeliveryDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productOutboundDeliveryQuantity != null" >
+                product_outbound_delivery_quantity = #{productOutboundDeliveryQuantity,jdbcType=INTEGER},
+            </if>
+        </set>
+        where sale_outbound_delivery_order_no = #{saleOutboundDeliveryOrderNo,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.SalesOutboundManagement" >
+        update sales_outbound_management
+        set
+            product_name=#{productName,jdbcType=VARCHAR},
+            customer_name=#{customerName,jdbcType=VARCHAR},
+            sales_staff=#{salesStaff,jdbcType=VARCHAR},
+            product_outbound_delivery_date= #{productOutboundDeliveryDate,jdbcType=TIMESTAMP},
+            product_outbound_delivery_quantity=#{productOutboundDeliveryQuantity,jdbcType=INTEGER},
+        where sale_outbound_delivery_order_no=#{saleOutboundDeliveryOrderNo,jdbcType=INTEGER}
+    </update>
+    <!--new-->
+    <select id="queryAllSalesOutbound" resultMap="BaseResultMap" >
+        select
+          *
+        from sales_outbound_management
+    </select>
+</mapper>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zx.erpsystem.system.dao.SysLogDao">
+
+    <resultMap type="com.zx.erpsystem.system.model.SysLog" id="SysLogMap">
+        <result property="logId" column="log_id" jdbcType="INTEGER"/>
+        <result property="logType" column="log_type" jdbcType="VARCHAR"/>
+        <result property="logTitle" column="log_title" jdbcType="VARCHAR"/>
+        <result property="logRemoteaddr" column="log_remoteAddr" jdbcType="VARCHAR"/>
+        <result property="logRequesturl" column="log_requestUrl" jdbcType="VARCHAR"/>
+        <result property="logMethod" column="log_method" jdbcType="VARCHAR"/>
+        <result property="logParams" column="log_params" jdbcType="VARCHAR"/>
+        <result property="logUseragent" column="log_userAgent" jdbcType="VARCHAR"/>
+        <result property="logException" column="log_exception" jdbcType="VARCHAR"/>
+        <result property="logBegindate" column="log_beginDate" jdbcType="TIMESTAMP"/>
+        <result property="logEnddate" column="log_endDate" jdbcType="TIMESTAMP"/>
+        <result property="delFlg" column="del_flg" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SysLogMap">
+        select
+          log_id, log_type, log_title, log_remoteAddr, log_requestUrl, log_method, log_params, log_userAgent, log_exception, log_beginDate, log_endDate, del_flg
+        from sys_log
+        where log_id = #{logId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SysLogMap">
+        select
+          log_id, log_type, log_title, log_remoteAddr, log_requestUrl, log_method, log_params, log_userAgent, log_exception, log_beginDate, log_endDate, del_flg
+        from sys_log
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="SysLogMap">
+        select
+          log_id, log_type, log_title, log_remoteAddr, log_requestUrl, log_method, log_params, log_userAgent, log_exception, log_beginDate, log_endDate, del_flg
+        from sys_log
+        <where>
+            <if test="logId != null">
+                and log_id = #{logId}
+            </if>
+            <if test="logType != null and logType != ''">
+                and log_type = #{logType}
+            </if>
+            <if test="logTitle != null and logTitle != ''">
+                and log_title = #{logTitle}
+            </if>
+            <if test="logRemoteaddr != null and logRemoteaddr != ''">
+                and log_remoteAddr = #{logRemoteaddr}
+            </if>
+            <if test="logRequesturl != null and logRequesturl != ''">
+                and log_requestUrl = #{logRequesturl}
+            </if>
+            <if test="logMethod != null and logMethod != ''">
+                and log_method = #{logMethod}
+            </if>
+            <if test="logParams != null and logParams != ''">
+                and log_params = #{logParams}
+            </if>
+            <if test="logUseragent != null and logUseragent != ''">
+                and log_userAgent = #{logUseragent}
+            </if>
+            <if test="logException != null and logException != ''">
+                and log_exception = #{logException}
+            </if>
+            <if test="logBegindate != null">
+                and log_beginDate = #{logBegindate}
+            </if>
+            <if test="logEnddate != null">
+                and log_endDate = #{logEnddate}
+            </if>
+            <if test="delFlg != null and delFlg != ''">
+                and del_flg = #{delFlg}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="logId" useGeneratedKeys="true">
+        insert into sys_log(log_type, log_title, log_remoteAddr, log_requestUrl, log_method, log_params, log_userAgent, log_exception, log_beginDate, log_endDate, del_flg)
+        values (#{logType}, #{logTitle}, #{logRemoteaddr}, #{logRequesturl}, #{logMethod}, #{logParams}, #{logUseragent}, #{logException}, #{logBegindate}, #{logEnddate}, #{delFlg})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update sys_log
+        <set>
+            <if test="logType != null and logType != ''">
+                log_type = #{logType},
+            </if>
+            <if test="logTitle != null and logTitle != ''">
+                log_title = #{logTitle},
+            </if>
+            <if test="logRemoteaddr != null and logRemoteaddr != ''">
+                log_remoteAddr = #{logRemoteaddr},
+            </if>
+            <if test="logRequesturl != null and logRequesturl != ''">
+                log_requestUrl = #{logRequesturl},
+            </if>
+            <if test="logMethod != null and logMethod != ''">
+                log_method = #{logMethod},
+            </if>
+            <if test="logParams != null and logParams != ''">
+                log_params = #{logParams},
+            </if>
+            <if test="logUseragent != null and logUseragent != ''">
+                log_userAgent = #{logUseragent},
+            </if>
+            <if test="logException != null and logException != ''">
+                log_exception = #{logException},
+            </if>
+            <if test="logBegindate != null">
+                log_beginDate = #{logBegindate},
+            </if>
+            <if test="logEnddate != null">
+                log_endDate = #{logEnddate},
+            </if>
+            <if test="delFlg != null and delFlg != ''">
+                del_flg = #{delFlg},
+            </if>
+        </set>
+        where log_id = #{logId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from sys_log where log_id = #{logId}
+    </delete>
+
+</mapper>

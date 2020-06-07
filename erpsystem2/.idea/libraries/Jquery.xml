@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="Jquery" type="javaScript">
+    <properties>
+      <option name="frameworkName" value="jQuery" />
+      <option name="frameworkVersion" value="1.1." />
+      <sourceFilesUrls>
+        <item url="file://D:/MyLenovoXiaoXinFloder/2019华清JAVAEE学习/201907030.java/jquery/jquery-3.1.1.min.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://D:/MyLenovoXiaoXinFloder/2019华清JAVAEE学习/201907030.java/jquery/jquery-3.1.1.min.js" />
+    </CLASSES>
+    <DOCUMENTATION>
+      <root url="http://api.jquery.com" />
+    </DOCUMENTATION>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

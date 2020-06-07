@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.CommodityInventoryManagementMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.CommodityInventoryManagement" >
+    <id column="commodity_inventory_no" property="commodityInventoryNo" jdbcType="INTEGER" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+    <result column="commodity_price" property="commodityPrice" jdbcType="DOUBLE" />
+    <result column="commodity_inventory_quantity" property="commodityInventoryQuantity" jdbcType="INTEGER" />
+    <result column="supplier" property="supplier" jdbcType="VARCHAR" />
+    <result column="procurement_staff" property="procurementStaff" jdbcType="VARCHAR" />
+    <result column="commodity_category" property="commodityCategory" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    commodity_inventory_no, commodity_name, commodity_price, commodity_inventory_quantity, 
+    supplier, procurement_staff, commodity_category
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from commodity_inventory_management
+    where commodity_inventory_no = #{commodityInventoryNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from commodity_inventory_management
+    where commodity_inventory_no = #{commodityInventoryNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.erpsystem.system.model.CommodityInventoryManagement" >
+    insert into commodity_inventory_management (commodity_inventory_no, commodity_name, 
+      commodity_price, commodity_inventory_quantity, 
+      supplier, procurement_staff, commodity_category
+      )
+    values (#{commodityInventoryNo,jdbcType=INTEGER}, #{commodityName,jdbcType=VARCHAR}, 
+      #{commodityPrice,jdbcType=DOUBLE}, #{commodityInventoryQuantity,jdbcType=INTEGER}, 
+      #{supplier,jdbcType=VARCHAR}, #{procurementStaff,jdbcType=VARCHAR}, #{commodityCategory,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.CommodityInventoryManagement" >
+    insert into commodity_inventory_management
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commodityInventoryNo != null" >
+        commodity_inventory_no,
+      </if>
+      <if test="commodityName != null" >
+        commodity_name,
+      </if>
+      <if test="commodityPrice != null" >
+        commodity_price,
+      </if>
+      <if test="commodityInventoryQuantity != null" >
+        commodity_inventory_quantity,
+      </if>
+      <if test="supplier != null" >
+        supplier,
+      </if>
+      <if test="procurementStaff != null" >
+        procurement_staff,
+      </if>
+      <if test="commodityCategory != null" >
+        commodity_category,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commodityInventoryNo != null" >
+        #{commodityInventoryNo,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null" >
+        #{commodityPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="commodityInventoryQuantity != null" >
+        #{commodityInventoryQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="supplier != null" >
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="procurementStaff != null" >
+        #{procurementStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCategory != null" >
+        #{commodityCategory,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.CommodityInventoryManagement" >
+    update commodity_inventory_management
+    <set >
+      <if test="commodityName != null" >
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null" >
+        commodity_price = #{commodityPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="commodityInventoryQuantity != null" >
+        commodity_inventory_quantity = #{commodityInventoryQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="supplier != null" >
+        supplier = #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="procurementStaff != null" >
+        procurement_staff = #{procurementStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCategory != null" >
+        commodity_category = #{commodityCategory,jdbcType=CHAR},
+      </if>
+    </set>
+    where commodity_inventory_no = #{commodityInventoryNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.CommodityInventoryManagement" >
+    update commodity_inventory_management
+    set commodity_name = #{commodityName,jdbcType=VARCHAR},
+      commodity_price = #{commodityPrice,jdbcType=DOUBLE},
+      commodity_inventory_quantity = #{commodityInventoryQuantity,jdbcType=INTEGER},
+      supplier = #{supplier,jdbcType=VARCHAR},
+      procurement_staff = #{procurementStaff,jdbcType=VARCHAR},
+      commodity_category = #{commodityCategory,jdbcType=CHAR}
+    where commodity_inventory_no = #{commodityInventoryNo,jdbcType=INTEGER}
+  </update>
+  <!--new-->
+  <select id="queryAllCommodityInventory" resultMap="BaseResultMap"  >
+    select
+      *
+    from commodity_inventory_management
+  </select>
+  <select id="queryAllCommodityInventory2" resultMap="BaseResultMap">
+	SELECT * FROM commodity_inventory_management LIMIT #{i},#{ps}
+  </select>
+  <delete id="deleteMany" parameterType="java.lang.Integer" >
+    delete from commodity_inventory_management
+    where commodity_inventory_no in
+    <foreach item="ids" collection="array" open="(" separator="," close=")">
+      #{ids,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+  <select id="queryAllCommodityInventory2ByValue" resultMap="BaseResultMap">
+   SELECT * from (SELECT * FROM commodity_inventory_management where concat(commodity_inventory_no,commodity_name,commodity_price,commodity_inventory_quantity,supplier,procurement_staff,commodity_category) like '%${value}%')as cim LIMIT #{i},#{ps}
+  </select>
+  <select id="queyAllCountByValue2" resultType="Integer" parameterType="java.util.HashMap"  >
+    select count(*) from  commodity_inventory_management where commodity_inventory_no like #{commodityInventoryNo}
+        or commodity_name like #{commodityName}
+        or commodity_price like #{commodityPrice}
+        or commodity_inventory_quantity like #{commodityInventoryQuantity}
+        or supplier like #{supplier}
+        or procurement_staff like #{procurementStaff}
+        or commodity_category like #{commodityCategory}
+  </select>
+  <select id="queryAllCommodityInventory2ByValue2" resultMap="BaseResultMap" parameterType="java.util.HashMap"  >
+    SELECT *FROM(select * from commodity_inventory_management where commodity_inventory_no like #{commodityInventoryNo}
+        or commodity_name like #{commodityName}
+        or commodity_price like #{commodityPrice}
+        or commodity_inventory_quantity like #{commodityInventoryQuantity}
+        or supplier like #{supplier}
+        or procurement_staff like #{procurementStaff}
+        or commodity_category like #{commodityCategory}
+    ) AS CIM LIMIT ${pc2},${ps}
+  </select>
+</mapper>

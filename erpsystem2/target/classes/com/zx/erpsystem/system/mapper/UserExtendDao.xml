@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".dao.UserExtendDao">
+
+    <resultMap type=".entity.UserExtend" id="UserExtendMap">
+        <result property="userExtendId" column="user_extend_id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="delFlg" column="del_flg" jdbcType="VARCHAR"/>
+        <result property="userAuditStatus" column="user_audit_status" jdbcType="VARCHAR"/>
+        <result property="company" column="company" jdbcType="VARCHAR"/>
+        <result property="officeName" column="office_name" jdbcType="VARCHAR"/>
+        <result property="no" column="no" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+        <result property="userType" column="user_type" jdbcType="VARCHAR"/>
+        <result property="loginIp" column="login_ip" jdbcType="VARCHAR"/>
+        <result property="loginDate" column="login_date" jdbcType="TIMESTAMP"/>
+        <result property="loginFlg" column="login_flg" jdbcType="VARCHAR"/>
+        <result property="photo" column="photo" jdbcType="VARCHAR"/>
+        <result property="oldLoginName" column="old_login_name" jdbcType="VARCHAR"/>
+        <result property="newPassword" column="new_password" jdbcType="VARCHAR"/>
+        <result property="oldLoginIp" column="old_login_ip" jdbcType="VARCHAR"/>
+        <result property="oldLoginDate" column="old_login_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UserExtendMap">
+        select
+          user_extend_id, user_id, del_flg, user_audit_status, company, office_name, no, name, email, phone, mobile, user_type, login_ip, login_date, login_flg, photo, old_login_name, new_password, old_login_ip, old_login_date
+        from erpsystem.user_extend
+        where user_extend_id = #{userExtendId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UserExtendMap">
+        select
+          user_extend_id, user_id, del_flg, user_audit_status, company, office_name, no, name, email, phone, mobile, user_type, login_ip, login_date, login_flg, photo, old_login_name, new_password, old_login_ip, old_login_date
+        from erpsystem.user_extend
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="UserExtendMap">
+        select
+          user_extend_id, user_id, del_flg, user_audit_status, company, office_name, no, name, email, phone, mobile, user_type, login_ip, login_date, login_flg, photo, old_login_name, new_password, old_login_ip, old_login_date
+        from erpsystem.user_extend
+        <where>
+            <if test="userExtendId != null">
+                and user_extend_id = #{userExtendId}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="delFlg != null and delFlg != ''">
+                and del_flg = #{delFlg}
+            </if>
+            <if test="userAuditStatus != null and userAuditStatus != ''">
+                and user_audit_status = #{userAuditStatus}
+            </if>
+            <if test="company != null and company != ''">
+                and company = #{company}
+            </if>
+            <if test="officeName != null and officeName != ''">
+                and office_name = #{officeName}
+            </if>
+            <if test="no != null and no != ''">
+                and no = #{no}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="mobile != null and mobile != ''">
+                and mobile = #{mobile}
+            </if>
+            <if test="userType != null and userType != ''">
+                and user_type = #{userType}
+            </if>
+            <if test="loginIp != null and loginIp != ''">
+                and login_ip = #{loginIp}
+            </if>
+            <if test="loginDate != null">
+                and login_date = #{loginDate}
+            </if>
+            <if test="loginFlg != null and loginFlg != ''">
+                and login_flg = #{loginFlg}
+            </if>
+            <if test="photo != null and photo != ''">
+                and photo = #{photo}
+            </if>
+            <if test="oldLoginName != null and oldLoginName != ''">
+                and old_login_name = #{oldLoginName}
+            </if>
+            <if test="newPassword != null and newPassword != ''">
+                and new_password = #{newPassword}
+            </if>
+            <if test="oldLoginIp != null and oldLoginIp != ''">
+                and old_login_ip = #{oldLoginIp}
+            </if>
+            <if test="oldLoginDate != null">
+                and old_login_date = #{oldLoginDate}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="userExtendId" useGeneratedKeys="true">
+        insert into erpsystem.user_extend(user_id, del_flg, user_audit_status, company, office_name, no, name, email, phone, mobile, user_type, login_ip, login_date, login_flg, photo, old_login_name, new_password, old_login_ip, old_login_date)
+        values (#{userId}, #{delFlg}, #{userAuditStatus}, #{company}, #{officeName}, #{no}, #{name}, #{email}, #{phone}, #{mobile}, #{userType}, #{loginIp}, #{loginDate}, #{loginFlg}, #{photo}, #{oldLoginName}, #{newPassword}, #{oldLoginIp}, #{oldLoginDate})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update erpsystem.user_extend
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="delFlg != null and delFlg != ''">
+                del_flg = #{delFlg},
+            </if>
+            <if test="userAuditStatus != null and userAuditStatus != ''">
+                user_audit_status = #{userAuditStatus},
+            </if>
+            <if test="company != null and company != ''">
+                company = #{company},
+            </if>
+            <if test="officeName != null and officeName != ''">
+                office_name = #{officeName},
+            </if>
+            <if test="no != null and no != ''">
+                no = #{no},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="mobile != null and mobile != ''">
+                mobile = #{mobile},
+            </if>
+            <if test="userType != null and userType != ''">
+                user_type = #{userType},
+            </if>
+            <if test="loginIp != null and loginIp != ''">
+                login_ip = #{loginIp},
+            </if>
+            <if test="loginDate != null">
+                login_date = #{loginDate},
+            </if>
+            <if test="loginFlg != null and loginFlg != ''">
+                login_flg = #{loginFlg},
+            </if>
+            <if test="photo != null and photo != ''">
+                photo = #{photo},
+            </if>
+            <if test="oldLoginName != null and oldLoginName != ''">
+                old_login_name = #{oldLoginName},
+            </if>
+            <if test="newPassword != null and newPassword != ''">
+                new_password = #{newPassword},
+            </if>
+            <if test="oldLoginIp != null and oldLoginIp != ''">
+                old_login_ip = #{oldLoginIp},
+            </if>
+            <if test="oldLoginDate != null">
+                old_login_date = #{oldLoginDate},
+            </if>
+        </set>
+        where user_extend_id = #{userExtendId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from erpsystem.user_extend where user_extend_id = #{userExtendId}
+    </delete>
+
+</mapper>

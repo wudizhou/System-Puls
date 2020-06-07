@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".dao.SysOfficeDao">
+
+    <resultMap type=".entity.SysOffice" id="SysOfficeMap">
+        <result property="officeId" column="office_id" jdbcType="INTEGER"/>
+        <result property="officeCode" column="office_code" jdbcType="VARCHAR"/>
+        <result property="officeType" column="office_type" jdbcType="VARCHAR"/>
+        <result property="officeGrade" column="office_grade" jdbcType="VARCHAR"/>
+        <result property="officeAddress" column="office_address" jdbcType="VARCHAR"/>
+        <result property="officeZipcode" column="office_zipcode" jdbcType="VARCHAR"/>
+        <result property="officeMaster" column="office_master" jdbcType="VARCHAR"/>
+        <result property="offficePhone" column="offfice_phone" jdbcType="VARCHAR"/>
+        <result property="officeFax" column="office_fax" jdbcType="VARCHAR"/>
+        <result property="officeEmail" column="office_email" jdbcType="VARCHAR"/>
+        <result property="officeUseable" column="office_useable" jdbcType="VARCHAR"/>
+        <result property="offficeGovernor" column="offfice_governor" jdbcType="VARCHAR"/>
+        <result property="officeDeputyGovernor" column="office_deputy_governor" jdbcType="VARCHAR"/>
+        <result property="delFlg" column="del_flg" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SysOfficeMap">
+        select
+          office_id, office_code, office_type, office_grade, office_address, office_zipcode, office_master, offfice_phone, office_fax, office_email, office_useable, offfice_governor, office_deputy_governor, del_flg
+        from erpsystem.sys_office
+        where office_id = #{officeId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SysOfficeMap">
+        select
+          office_id, office_code, office_type, office_grade, office_address, office_zipcode, office_master, offfice_phone, office_fax, office_email, office_useable, offfice_governor, office_deputy_governor, del_flg
+        from erpsystem.sys_office
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="SysOfficeMap">
+        select
+          office_id, office_code, office_type, office_grade, office_address, office_zipcode, office_master, offfice_phone, office_fax, office_email, office_useable, offfice_governor, office_deputy_governor, del_flg
+        from erpsystem.sys_office
+        <where>
+            <if test="officeId != null">
+                and office_id = #{officeId}
+            </if>
+            <if test="officeCode != null and officeCode != ''">
+                and office_code = #{officeCode}
+            </if>
+            <if test="officeType != null and officeType != ''">
+                and office_type = #{officeType}
+            </if>
+            <if test="officeGrade != null and officeGrade != ''">
+                and office_grade = #{officeGrade}
+            </if>
+            <if test="officeAddress != null and officeAddress != ''">
+                and office_address = #{officeAddress}
+            </if>
+            <if test="officeZipcode != null and officeZipcode != ''">
+                and office_zipcode = #{officeZipcode}
+            </if>
+            <if test="officeMaster != null and officeMaster != ''">
+                and office_master = #{officeMaster}
+            </if>
+            <if test="offficePhone != null and offficePhone != ''">
+                and offfice_phone = #{offficePhone}
+            </if>
+            <if test="officeFax != null and officeFax != ''">
+                and office_fax = #{officeFax}
+            </if>
+            <if test="officeEmail != null and officeEmail != ''">
+                and office_email = #{officeEmail}
+            </if>
+            <if test="officeUseable != null and officeUseable != ''">
+                and office_useable = #{officeUseable}
+            </if>
+            <if test="offficeGovernor != null and offficeGovernor != ''">
+                and offfice_governor = #{offficeGovernor}
+            </if>
+            <if test="officeDeputyGovernor != null and officeDeputyGovernor != ''">
+                and office_deputy_governor = #{officeDeputyGovernor}
+            </if>
+            <if test="delFlg != null and delFlg != ''">
+                and del_flg = #{delFlg}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="officeId" useGeneratedKeys="true">
+        insert into erpsystem.sys_office(office_code, office_type, office_grade, office_address, office_zipcode, office_master, offfice_phone, office_fax, office_email, office_useable, offfice_governor, office_deputy_governor, del_flg)
+        values (#{officeCode}, #{officeType}, #{officeGrade}, #{officeAddress}, #{officeZipcode}, #{officeMaster}, #{offficePhone}, #{officeFax}, #{officeEmail}, #{officeUseable}, #{offficeGovernor}, #{officeDeputyGovernor}, #{delFlg})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update erpsystem.sys_office
+        <set>
+            <if test="officeCode != null and officeCode != ''">
+                office_code = #{officeCode},
+            </if>
+            <if test="officeType != null and officeType != ''">
+                office_type = #{officeType},
+            </if>
+            <if test="officeGrade != null and officeGrade != ''">
+                office_grade = #{officeGrade},
+            </if>
+            <if test="officeAddress != null and officeAddress != ''">
+                office_address = #{officeAddress},
+            </if>
+            <if test="officeZipcode != null and officeZipcode != ''">
+                office_zipcode = #{officeZipcode},
+            </if>
+            <if test="officeMaster != null and officeMaster != ''">
+                office_master = #{officeMaster},
+            </if>
+            <if test="offficePhone != null and offficePhone != ''">
+                offfice_phone = #{offficePhone},
+            </if>
+            <if test="officeFax != null and officeFax != ''">
+                office_fax = #{officeFax},
+            </if>
+            <if test="officeEmail != null and officeEmail != ''">
+                office_email = #{officeEmail},
+            </if>
+            <if test="officeUseable != null and officeUseable != ''">
+                office_useable = #{officeUseable},
+            </if>
+            <if test="offficeGovernor != null and offficeGovernor != ''">
+                offfice_governor = #{offficeGovernor},
+            </if>
+            <if test="officeDeputyGovernor != null and officeDeputyGovernor != ''">
+                office_deputy_governor = #{officeDeputyGovernor},
+            </if>
+            <if test="delFlg != null and delFlg != ''">
+                del_flg = #{delFlg},
+            </if>
+        </set>
+        where office_id = #{officeId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from erpsystem.sys_office where office_id = #{officeId}
+    </delete>
+
+</mapper>

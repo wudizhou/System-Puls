@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.SalesOrderBrowseMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.SalesOrderBrowse" >
+    <id column="sales_order_no" property="salesOrderNo" jdbcType="INTEGER" />
+    <result column="product_name" property="productName" jdbcType="CHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="sales_quantity" property="salesQuantity" jdbcType="INTEGER" />
+    <result column="sales_date" property="salesDate" jdbcType="TIMESTAMP" />
+    <result column="sales_status" property="salesStatus" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sales_order_no, product_name, customer_name, sales_quantity, sales_date, sales_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sales_order_browse
+    where sales_order_no = #{salesOrderNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sales_order_browse
+    where sales_order_no = #{salesOrderNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.erpsystem.system.model.SalesOrderBrowse" >
+    insert into sales_order_browse (sales_order_no, product_name, customer_name, 
+      sales_quantity, sales_date, sales_status
+      )
+    values (#{salesOrderNo,jdbcType=INTEGER}, #{productName,jdbcType=CHAR}, #{customerName,jdbcType=VARCHAR}, 
+      #{salesQuantity,jdbcType=INTEGER}, #{salesDate,jdbcType=TIMESTAMP}, #{salesStatus,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.SalesOrderBrowse" >
+    insert into sales_order_browse
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="salesOrderNo != null" >
+        sales_order_no,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="salesQuantity != null" >
+        sales_quantity,
+      </if>
+      <if test="salesDate != null" >
+        sales_date,
+      </if>
+      <if test="salesStatus != null" >
+        sales_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="salesOrderNo != null" >
+        #{salesOrderNo,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=CHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="salesQuantity != null" >
+        #{salesQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="salesDate != null" >
+        #{salesDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salesStatus != null" >
+        #{salesStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.SalesOrderBrowse" >
+    update sales_order_browse
+    <set >
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=CHAR},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="salesQuantity != null" >
+        sales_quantity = #{salesQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="salesDate != null" >
+        sales_date = #{salesDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salesStatus != null" >
+        sales_status = #{salesStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where sales_order_no = #{salesOrderNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.SalesOrderBrowse" >
+    update sales_order_browse
+    set product_name = #{productName,jdbcType=CHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      sales_quantity = #{salesQuantity,jdbcType=INTEGER},
+      sales_date = #{salesDate,jdbcType=TIMESTAMP},
+      sales_status = #{salesStatus,jdbcType=CHAR}
+    where sales_order_no = #{salesOrderNo,jdbcType=INTEGER}
+  </update>
+  <!--new-->
+  <select id="queryAllSalesOrder" resultMap="BaseResultMap" >
+    select
+     *
+    from sales_order_browse
+  </select>
+  <!--new-->
+  <select id="querySalesOrderByStatus" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+     *
+    from sales_order_browse where sales_status =#{s}
+  </select>
+  <!--<select id="sumTQuanity" resultType="java.lang.Integer">-->
+<!-- select SUM(s.sales_quantity)from s.sales_order_browse s where s.product_name ='${name}' AND s.sales_date >='${riseQuarter}'AND s.sales_date &lt;'${stopQuarter}'-->
+  <!--</select>-->
+  <select id="querySalesOrderBySalesOrderDimId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+     *
+    from sales_order_browse where sales_order_no like #{s2}
+  </select>
+  <select id="querySalesOrderBySalesOrderDimCoa" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+     *
+    from sales_order_browse where product_name like #{s3}
+  </select>
+  <select id="getsalesOrderStatus" resultType="java.lang.String" parameterType="java.lang.Integer" >
+    select
+     sales_status
+    from sales_order_browse where sales_order_no =#{staySalesOrderNo}
+  </select>
+</mapper>

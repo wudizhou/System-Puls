@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.PurchaseWarehousingManagementMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.PurchaseWarehousingManagement" >
+    <id column="purchase_storage_orders_no" property="purchaseStorageOrdersNo" jdbcType="INTEGER" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+    <result column="commodity_storage_quantity" property="commodityStorageQuantity" jdbcType="INTEGER" />
+    <result column="supplier" property="supplier" jdbcType="VARCHAR" />
+    <result column="commodity_storage_date" property="commodityStorageDate" jdbcType="TIMESTAMP" />
+    <result column="storage_staff" property="storageStaff" jdbcType="CHAR" />
+    <result column="commodity_category" property="commodityCategory" jdbcType="CHAR" />
+    <result column="commodity_storage_status" property="commodityStorageStatus" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    purchase_storage_orders_no, commodity_name, commodity_storage_quantity, supplier, 
+    commodity_storage_date, storage_staff, commodity_category, commodity_storage_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from purchase_warehousing_management
+    where purchase_storage_orders_no = #{purchaseStorageOrdersNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from purchase_warehousing_management
+    where purchase_storage_orders_no = #{purchaseStorageOrdersNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.erpsystem.system.model.PurchaseWarehousingManagement" >
+    insert into purchase_warehousing_management (purchase_storage_orders_no, commodity_name, 
+      commodity_storage_quantity, supplier, commodity_storage_date, 
+      storage_staff, commodity_category, commodity_storage_status
+      )
+    values (#{purchaseStorageOrdersNo,jdbcType=INTEGER}, #{commodityName,jdbcType=VARCHAR}, 
+      #{commodityStorageQuantity,jdbcType=INTEGER}, #{supplier,jdbcType=VARCHAR}, #{commodityStorageDate,jdbcType=TIMESTAMP}, 
+      #{storageStaff,jdbcType=CHAR}, #{commodityCategory,jdbcType=CHAR}, #{commodityStorageStatus,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.PurchaseWarehousingManagement" >
+    insert into purchase_warehousing_management
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purchaseStorageOrdersNo != null" >
+        purchase_storage_orders_no,
+      </if>
+      <if test="commodityName != null" >
+        commodity_name,
+      </if>
+      <if test="commodityStorageQuantity != null" >
+        commodity_storage_quantity,
+      </if>
+      <if test="supplier != null" >
+        supplier,
+      </if>
+      <if test="commodityStorageDate != null" >
+        commodity_storage_date,
+      </if>
+      <if test="storageStaff != null" >
+        storage_staff,
+      </if>
+      <if test="commodityCategory != null" >
+        commodity_category,
+      </if>
+      <if test="commodityStorageStatus != null" >
+        commodity_storage_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purchaseStorageOrdersNo != null" >
+        #{purchaseStorageOrdersNo,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityStorageQuantity != null" >
+        #{commodityStorageQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="supplier != null" >
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityStorageDate != null" >
+        #{commodityStorageDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storageStaff != null" >
+        #{storageStaff,jdbcType=CHAR},
+      </if>
+      <if test="commodityCategory != null" >
+        #{commodityCategory,jdbcType=CHAR},
+      </if>
+      <if test="commodityStorageStatus != null" >
+        #{commodityStorageStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.PurchaseWarehousingManagement" >
+    update purchase_warehousing_management
+    <set >
+      <if test="commodityName != null" >
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityStorageQuantity != null" >
+        commodity_storage_quantity = #{commodityStorageQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="supplier != null" >
+        supplier = #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityStorageDate != null" >
+        commodity_storage_date = #{commodityStorageDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storageStaff != null" >
+        storage_staff = #{storageStaff,jdbcType=CHAR},
+      </if>
+      <if test="commodityCategory != null" >
+        commodity_category = #{commodityCategory,jdbcType=CHAR},
+      </if>
+      <if test="commodityStorageStatus != null" >
+        commodity_storage_status = #{commodityStorageStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where purchase_storage_orders_no = #{purchaseStorageOrdersNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.PurchaseWarehousingManagement" >
+    update purchase_warehousing_management
+    set commodity_name = #{commodityName,jdbcType=VARCHAR},
+      commodity_storage_quantity = #{commodityStorageQuantity,jdbcType=INTEGER},
+      supplier = #{supplier,jdbcType=VARCHAR},
+      commodity_storage_date = #{commodityStorageDate,jdbcType=TIMESTAMP},
+      storage_staff = #{storageStaff,jdbcType=CHAR},
+      commodity_category = #{commodityCategory,jdbcType=CHAR},
+      commodity_storage_status = #{commodityStorageStatus,jdbcType=CHAR}
+    where purchase_storage_orders_no = #{purchaseStorageOrdersNo,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryAllPurchaseWarehousing" resultMap="BaseResultMap"  >
+    select
+    *
+    from purchase_warehousing_management
+  </select>
+</mapper>

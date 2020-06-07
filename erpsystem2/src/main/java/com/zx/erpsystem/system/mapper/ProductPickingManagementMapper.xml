@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.ProductPickingManagementMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.ProductPickingManagement" >
+    <id column="picking_orders_no" property="pickingOrdersNo" jdbcType="INTEGER" />
+    <result column="commodity_name" property="commodityName" jdbcType="CHAR" />
+    <result column="picking_quantity" property="pickingQuantity" jdbcType="INTEGER" />
+    <result column="picking_date" property="pickingDate" jdbcType="TIMESTAMP" />
+    <result column="product_picking_status" property="productPickingStatus" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    picking_orders_no, commodity_name, picking_quantity, picking_date, product_picking_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_picking_management
+    where picking_orders_no = #{pickingOrdersNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_picking_management
+    where picking_orders_no = #{pickingOrdersNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.erpsystem.system.model.ProductPickingManagement" >
+    insert into product_picking_management (picking_orders_no, commodity_name, picking_quantity, 
+      picking_date, product_picking_status)
+    values (#{pickingOrdersNo,jdbcType=INTEGER}, #{commodityName,jdbcType=CHAR}, #{pickingQuantity,jdbcType=INTEGER}, 
+      #{pickingDate,jdbcType=TIMESTAMP}, #{productPickingStatus,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.ProductPickingManagement" >
+    insert into product_picking_management
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pickingOrdersNo != null" >
+        picking_orders_no,
+      </if>
+      <if test="commodityName != null" >
+        commodity_name,
+      </if>
+      <if test="pickingQuantity != null" >
+        picking_quantity,
+      </if>
+      <if test="pickingDate != null" >
+        picking_date,
+      </if>
+      <if test="productPickingStatus != null" >
+        product_picking_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pickingOrdersNo != null" >
+        #{pickingOrdersNo,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        #{commodityName,jdbcType=CHAR},
+      </if>
+      <if test="pickingQuantity != null" >
+        #{pickingQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="pickingDate != null" >
+        #{pickingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productPickingStatus != null" >
+        #{productPickingStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.ProductPickingManagement" >
+    update product_picking_management
+    <set >
+      <if test="commodityName != null" >
+        commodity_name = #{commodityName,jdbcType=CHAR},
+      </if>
+      <if test="pickingQuantity != null" >
+        picking_quantity = #{pickingQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="pickingDate != null" >
+        picking_date = #{pickingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productPickingStatus != null" >
+        product_picking_status = #{productPickingStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where picking_orders_no = #{pickingOrdersNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.ProductPickingManagement" >
+    update product_picking_management
+    set commodity_name = #{commodityName,jdbcType=CHAR},
+      picking_quantity = #{pickingQuantity,jdbcType=INTEGER},
+      picking_date = #{pickingDate,jdbcType=TIMESTAMP},
+      product_picking_status = #{productPickingStatus,jdbcType=CHAR}
+    where picking_orders_no = #{pickingOrdersNo,jdbcType=INTEGER}
+  </update>
+</mapper>

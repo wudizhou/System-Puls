@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.CustomerManagementMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.CustomerManagement" >
+    <id column="customer_management_no" property="customerManagementNo" jdbcType="INTEGER" />
+    <result column="customer_abbreviation" property="customerAbbreviation" jdbcType="CHAR" />
+    <result column="customer_tel" property="customerTel" jdbcType="VARCHAR" />
+    <result column="customer_linkman" property="customerLinkman" jdbcType="CHAR" />
+    <result column="customer_email" property="customerEmail" jdbcType="VARCHAR" />
+    <result column="customer_deposit_bank" property="customerDepositBank" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    customer_management_no, customer_abbreviation, customer_tel, customer_linkman, customer_email, 
+    customer_deposit_bank
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer_management
+    where customer_management_no = #{customerManagementNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from customer_management
+    where customer_management_no = #{customerManagementNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.erpsystem.system.model.CustomerManagement" >
+    insert into customer_management (customer_management_no, customer_abbreviation, 
+      customer_tel, customer_linkman, customer_email, 
+      customer_deposit_bank)
+    values (#{customerManagementNo,jdbcType=INTEGER}, #{customerAbbreviation,jdbcType=CHAR}, 
+      #{customerTel,jdbcType=VARCHAR}, #{customerLinkman,jdbcType=CHAR}, #{customerEmail,jdbcType=VARCHAR}, 
+      #{customerDepositBank,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.CustomerManagement" >
+    insert into customer_management
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerManagementNo != null" >
+        customer_management_no,
+      </if>
+      <if test="customerAbbreviation != null" >
+        customer_abbreviation,
+      </if>
+      <if test="customerTel != null" >
+        customer_tel,
+      </if>
+      <if test="customerLinkman != null" >
+        customer_linkman,
+      </if>
+      <if test="customerEmail != null" >
+        customer_email,
+      </if>
+      <if test="customerDepositBank != null" >
+        customer_deposit_bank,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerManagementNo != null" >
+        #{customerManagementNo,jdbcType=INTEGER},
+      </if>
+      <if test="customerAbbreviation != null" >
+        #{customerAbbreviation,jdbcType=CHAR},
+      </if>
+      <if test="customerTel != null" >
+        #{customerTel,jdbcType=VARCHAR},
+      </if>
+      <if test="customerLinkman != null" >
+        #{customerLinkman,jdbcType=CHAR},
+      </if>
+      <if test="customerEmail != null" >
+        #{customerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="customerDepositBank != null" >
+        #{customerDepositBank,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.CustomerManagement" >
+    update customer_management
+    <set >
+      <if test="customerAbbreviation != null" >
+        customer_abbreviation = #{customerAbbreviation,jdbcType=CHAR},
+      </if>
+      <if test="customerTel != null" >
+        customer_tel = #{customerTel,jdbcType=VARCHAR},
+      </if>
+      <if test="customerLinkman != null" >
+        customer_linkman = #{customerLinkman,jdbcType=CHAR},
+      </if>
+      <if test="customerEmail != null" >
+        customer_email = #{customerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="customerDepositBank != null" >
+        customer_deposit_bank = #{customerDepositBank,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where customer_management_no = #{customerManagementNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.CustomerManagement" >
+    update customer_management
+    set customer_abbreviation = #{customerAbbreviation,jdbcType=CHAR},
+      customer_tel = #{customerTel,jdbcType=VARCHAR},
+      customer_linkman = #{customerLinkman,jdbcType=CHAR},
+      customer_email = #{customerEmail,jdbcType=VARCHAR},
+      customer_deposit_bank = #{customerDepositBank,jdbcType=VARCHAR}
+    where customer_management_no = #{customerManagementNo,jdbcType=INTEGER}
+  </update>
+  <!--new-->
+  <select id="queryAllCustomer" resultMap="BaseResultMap" >
+    select
+     *
+    from customer_management
+  </select>
+
+</mapper>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zx.erpsystem.system.dao.PurchasingManagementMapper">
+
+    <resultMap type="com.zx.erpsystem.system.model.PurchasingManagement" id="PurchasingManagementMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="purchaseExplain" column="purchase_explain" jdbcType="VARCHAR"/>
+        <result property="creatTime" column="creat_time" jdbcType="TIMESTAMP"/>
+        <result property="checkTime" column="check_time" jdbcType="TIMESTAMP"/>
+        <result property="checkStatus" column="check_status" jdbcType="VARCHAR"/>
+        <result property="checkExplain" column="check_explain" jdbcType="VARCHAR"/>
+        <result property="buyer" column="buyer" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PurchasingManagementMap">
+        select
+          id, purchase_explain, creat_time, check_time, check_status, check_explain, buyer
+        from erpsystem.purchasing_management
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="PurchasingManagementMap">
+        select
+          id, purchase_explain, creat_time, check_time, check_status, check_explain, buyer
+        from erpsystem.purchasing_management
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" parameterType="com.zx.erpsystem.system.model.PurchasingManagement" resultMap="PurchasingManagementMap">
+        select
+          id, purchase_explain, creat_time, check_time, check_status, check_explain, buyer
+        from erpsystem.purchasing_management
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="purchaseExplain != null and purchaseExplain != ''">
+                and purchase_explain = #{purchaseExplain}
+            </if>
+            <if test="creatTime != null">
+                and creat_time = #{creatTime,jdbcType="TIMESTAMP"}
+            </if>
+            <if test="checkTime != null">
+                and check_time = #{checkTime,jdbcType="TIMESTAMP"}
+            </if>
+            <if test="checkStatus != null and checkStatus != ''">
+                and check_status = #{checkStatus}
+            </if>
+            <if test="checkExplain != null and checkExplain != ''">
+                and check_explain = #{checkExplain}
+            </if>
+            <if test="buyer != null and buyer != ''">
+                and buyer = #{buyer}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" parameterType="com.zx.erpsystem.system.model.PurchasingManagement">
+        insert into erpsystem.purchasing_management(id ,purchase_explain, creat_time, check_status, buyer)
+        values (#{id}, #{purchaseExplain}, #{creatTime}, #{checkStatus}, #{buyer})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update erpsystem.purchasing_management
+        <set>
+            <if test="purchaseExplain != null and purchaseExplain != ''">
+                purchase_explain = #{purchaseExplain},
+            </if>
+            <if test="creatTime != null">
+                creat_time = #{creatTime},
+            </if>
+            <if test="checkTime != null">
+                check_time = #{checkTime},
+            </if>
+            <if test="checkStatus != null and checkStatus != ''">
+                check_status = #{checkStatus},
+            </if>
+            <if test="checkExplain != null and checkExplain != ''">
+                check_explain = #{checkExplain},
+            </if>
+            <if test="buyer != null and buyer != ''">
+                buyer = #{buyer},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from erpsystem.purchasing_management where id = #{id}
+    </delete>
+
+</mapper>

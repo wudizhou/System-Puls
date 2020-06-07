@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.erpsystem.system.dao.PickingOutboundManagementMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.erpsystem.system.model.PickingOutboundManagement" >
+    <id column="picking_outbound_delivery_order_no" property="pickingOutboundDeliveryOrderNo" jdbcType="INTEGER" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+    <result column="supplier" property="supplier" jdbcType="VARCHAR" />
+    <result column="procurement_staff" property="procurementStaff" jdbcType="VARCHAR" />
+    <result column="commodity_outbound_delivery_date" property="commodityOutboundDeliveryDate" jdbcType="TIMESTAMP" />
+    <result column="commodity_outbound_delivery_quantity" property="commodityOutboundDeliveryQuantity" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    picking_outbound_delivery_order_no, commodity_name, supplier, procurement_staff, 
+    commodity_outbound_delivery_date, commodity_outbound_delivery_quantity
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from picking_outbound_management
+    where picking_outbound_delivery_order_no = #{pickingOutboundDeliveryOrderNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from picking_outbound_management
+    where picking_outbound_delivery_order_no = #{pickingOutboundDeliveryOrderNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.erpsystem.system.model.PickingOutboundManagement" >
+    insert into picking_outbound_management (picking_outbound_delivery_order_no, commodity_name, 
+      supplier, procurement_staff, commodity_outbound_delivery_date, 
+      commodity_outbound_delivery_quantity)
+    values (#{pickingOutboundDeliveryOrderNo,jdbcType=INTEGER}, #{commodityName,jdbcType=VARCHAR}, 
+      #{supplier,jdbcType=VARCHAR}, #{procurementStaff,jdbcType=VARCHAR}, #{commodityOutboundDeliveryDate,jdbcType=TIMESTAMP}, 
+      #{commodityOutboundDeliveryQuantity,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.erpsystem.system.model.PickingOutboundManagement" >
+    insert into picking_outbound_management
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pickingOutboundDeliveryOrderNo != null" >
+        picking_outbound_delivery_order_no,
+      </if>
+      <if test="commodityName != null" >
+        commodity_name,
+      </if>
+      <if test="supplier != null" >
+        supplier,
+      </if>
+      <if test="procurementStaff != null" >
+        procurement_staff,
+      </if>
+      <if test="commodityOutboundDeliveryDate != null" >
+        commodity_outbound_delivery_date,
+      </if>
+      <if test="commodityOutboundDeliveryQuantity != null" >
+        commodity_outbound_delivery_quantity,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pickingOutboundDeliveryOrderNo != null" >
+        #{pickingOutboundDeliveryOrderNo,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null" >
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="procurementStaff != null" >
+        #{procurementStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityOutboundDeliveryDate != null" >
+        #{commodityOutboundDeliveryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commodityOutboundDeliveryQuantity != null" >
+        #{commodityOutboundDeliveryQuantity,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.erpsystem.system.model.PickingOutboundManagement" >
+    update picking_outbound_management
+    <set >
+      <if test="commodityName != null" >
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null" >
+        supplier = #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="procurementStaff != null" >
+        procurement_staff = #{procurementStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityOutboundDeliveryDate != null" >
+        commodity_outbound_delivery_date = #{commodityOutboundDeliveryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commodityOutboundDeliveryQuantity != null" >
+        commodity_outbound_delivery_quantity = #{commodityOutboundDeliveryQuantity,jdbcType=INTEGER},
+      </if>
+    </set>
+    where picking_outbound_delivery_order_no = #{pickingOutboundDeliveryOrderNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.erpsystem.system.model.PickingOutboundManagement" >
+    update picking_outbound_management
+    set commodity_name = #{commodityName,jdbcType=VARCHAR},
+      supplier = #{supplier,jdbcType=VARCHAR},
+      procurement_staff = #{procurementStaff,jdbcType=VARCHAR},
+      commodity_outbound_delivery_date = #{commodityOutboundDeliveryDate,jdbcType=TIMESTAMP},
+      commodity_outbound_delivery_quantity = #{commodityOutboundDeliveryQuantity,jdbcType=INTEGER}
+    where picking_outbound_delivery_order_no = #{pickingOutboundDeliveryOrderNo,jdbcType=INTEGER}
+  </update>
+  <!--new-->
+  <select id="queryAllpickingOutbound" resultMap="BaseResultMap" >
+        select
+          *
+        from picking_outbound_management
+    </select>
+</mapper>
